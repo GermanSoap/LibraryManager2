@@ -19,3 +19,6 @@ char* LineBuffering(FILE* fp, char* str, int maxSize)
     str[len] = 0;
     return str;
 }
+void StudentDataOpening() {
+	FILE* studentdata = fopen("Student.txt", "rt");
+}
