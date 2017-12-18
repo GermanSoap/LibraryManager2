@@ -4,13 +4,7 @@
 #include <conio.h>
 #include <string.h>
 #include <ctype.h>
-#define maxBook 100
-#define szISBN 10
-#define szBookName 30
-#define szAuthor 25
-#define szProducer 25
-#define szYearProducing 4 
-#define szGenre 20
+#include "BookComponents.h"
  struct Book
 {
 	char ISBN[szISBN];

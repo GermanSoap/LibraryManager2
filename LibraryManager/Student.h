@@ -1,22 +1,11 @@
 #ifndef STUDENT
 #define STUDENT
-#define maxStudent 100
-#define szLibID 10
-#define szName 25
-#define szID 10
-#define szBirth 15
-#define szSex 6
-#define szEmail 25
-#define szAddress 30
 #include <stdio.h>
 #include <conio.h>
 #include <string.h>
 #include <ctype.h>
- struct Time {
-	int day;
-	int month;
-	int year;
-};
+#include "Time.h"
+#include "StudentComponents.h"
  struct Student {
 	char LibID[szLibID];
 	char Name[szName];

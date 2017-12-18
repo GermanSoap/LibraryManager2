@@ -1,6 +1,5 @@
 #include "CoreFunction.h"
 #include "Student.h"
-#include "StudentComponents.h"
 
 int buffStudent(FILE* studentdata, Student &student){
     int d, m, y;
@@ -23,6 +22,7 @@ int buffStudent(FILE* studentdata, Student &student){
 	student.timeExpired.day = dx;
 	student.timeExpired.month = mx;
 	student.timeExpired.year = yx;
+	
     return 1;
 }
 void buffAllStudents(FILE* studentdata, Student studentList[], int &studentcounter){
