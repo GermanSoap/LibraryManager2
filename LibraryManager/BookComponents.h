@@ -10,4 +10,6 @@
 extern int totalbook;
 extern int bookcounter;
 extern int readybook;
+extern int borrowedbook;
+extern int remainingbook;
 #endif // !BOOKCOMPONENTS

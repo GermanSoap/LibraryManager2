@@ -1,8 +1,8 @@
 #include "BundleContents.h"
 #include "Student.h"
 #include "Book.h"
-Book bookList[maxBook];
-Student studentList[maxStudent];
+Book bookList[maxBook]; // solve external struct
+Student studentList[maxStudent]; // same as line 4
 /*Starting Introduction function
 Type : void
 Input : none

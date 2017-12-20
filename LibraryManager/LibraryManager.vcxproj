@@ -25,6 +25,7 @@
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CoreFunction.cpp" />
     <ClCompile Include="MainActivity.cpp" />
+    <ClCompile Include="Statistics.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentComponents.cpp" />
   </ItemGroup>
@@ -35,6 +36,7 @@
     <ClInclude Include="Card.h" />
     <ClInclude Include="CoreFunction.h" />
     <ClInclude Include="MainActivity.h" />
+    <ClInclude Include="Statistics.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentComponents.h" />
     <ClInclude Include="Time.h" />
