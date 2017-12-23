@@ -68,7 +68,7 @@ Type : void
 Input : none
 Output : print informations about books which are in-use
 */
-void TotalBookInUse() {
+void TotalBookInUse(Book bookList[]) {
 	printf(" ================= THONG KE SACH DANG MUON =================\n");
 	printf("   -> Co %d sach dang duoc muon \n", borrowedbook);
 	
@@ -79,7 +79,7 @@ Type : void
 Input : none
 Output : print info about students in late
 */
-void LateStats() {
+void LateStats(BorrowingCard cardList[]) {
 	system("cls");
 	printf("================== THONG KE DOC GIA DANG TRE HAN =================\n");
 	printf("\n");

@@ -651,4 +651,47 @@ void ReturningInput(BorrowingCard cardList[]){
 		}
 	}
 }
-
+void CardMenu(){
+	 {
+		while (true)
+		{
+			system("cls");
+			printf("================ MENU PHIEU THU VIEN ==============\n");
+			printf("   -> 1. Lap phieu muon sach \n");
+			printf("   -> 2. Lap phieu tra sach \n");
+			printf("   -> 3. Xem danh sach phieu muon \n");
+			printf("   -> 4. Xem danh sach phieu tra \n");
+			printf("   -> 0. Thoat                \n");
+			printf("===================================================\n");
+			int choice;
+			printf("   -> Nhap vao lua chon : ");
+			scanf_s("%d", &choice);
+			getchar();
+			if (choice == 0) break;
+			else if (choice == 1)
+			{
+				BorrowingInput(cardList, bookList);
+				break;
+			}
+			else if (choice == 2)
+			{
+				ReturningInput(cardList);
+				// EstimatedReturnTime(); no need
+				break;
+			}
+			else if (choice == 3)
+			{
+				getBorrowingList(cardList); break;
+			}
+			else if (choice == 4)
+			{
+			//	getReturningList(cardList); break;
+			}
+			else
+			{
+				printf("Lua chon khong hop le ! Vui long thu lai !\n");
+				Sleep(500);
+			}
+		}
+	}
+}

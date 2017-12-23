@@ -35,4 +35,5 @@ Time EstimatedTime(Time timeBorrow);
 void getBorrowingList(BorrowingCard cardList[]);
 void ReturningInput(BorrowingCard cardList[]);
 void getReturningList(BorrowingCard cardList[]);
+void CardMenu();
 #endif // !CARD

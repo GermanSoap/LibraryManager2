@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="Book.cpp" />
     <ClCompile Include="BookComponents.cpp" />
-    <ClCompile Include="BundleContents.cpp" />
+    <ClCompile Include="MenuLists.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CoreFunction.cpp" />
     <ClCompile Include="MainActivity.cpp" />
@@ -32,10 +32,9 @@
   <ItemGroup>
     <ClInclude Include="Book.h" />
     <ClInclude Include="BookComponents.h" />
-    <ClInclude Include="BundleContents.h" />
+    <ClInclude Include="MenuLists.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CoreFunction.h" />
-    <ClInclude Include="MainActivity.h" />
     <ClInclude Include="Statistics.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentComponents.h" />

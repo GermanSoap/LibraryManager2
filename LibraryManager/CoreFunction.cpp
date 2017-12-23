@@ -19,6 +19,12 @@ char* LineBuffering(FILE* fp, char* str, int maxSize)
     str[len] = 0;
     return str;
 }
-void StudentDataOpening() {
-	FILE* studentdata = fopen("Student.txt", "rt");
+int fileChecking(const char* filename){
+	FILE* file;
+	if (file = fopen(filename, "r"))
+	{
+		fclose(file);
+		return 1;
+	}
+	return 0;
 }

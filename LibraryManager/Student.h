@@ -19,7 +19,7 @@
 };
  extern Student studentList[maxStudent];
 int buffStudent(FILE* studentdata, Student &student);
-void buffAllStudents(FILE* studentdata, Student studentList[], int &studentcounter);
+void StudentFetching(FILE* studentdata, Student studentList[], int &studentcounter);
 void StudentEditing(Student studentList[], int number);
 void ESSubMenu(int number);
 void StudentListing(Student studentList[]);

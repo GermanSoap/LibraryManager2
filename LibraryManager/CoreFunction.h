@@ -6,5 +6,6 @@
 #include <Windows.h>
 char* LineBuffering(FILE* fp, char* str, int maxSize);
 void StudentDataOpening();
-void FileTransfer(FILE* studentdata);
+
+int fileChecking(const char* filename);
 #endif //COREFUNCTION

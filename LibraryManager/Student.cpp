@@ -25,7 +25,7 @@ int buffStudent(FILE* studentdata, Student &student){
 	
     return 1;
 }
-void buffAllStudents(FILE* studentdata, Student studentList[], int &studentcounter){
+void StudentFetching(FILE* studentdata, Student studentList[], int &studentcounter){
     Student student; 
 	studentcounter = 0;
     while (!feof(studentdata))
