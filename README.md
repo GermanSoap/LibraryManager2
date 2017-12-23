@@ -42,8 +42,8 @@ Optional. The path and name of a project file within the solution. You can enter
 Optional. The name of a project build configuration to be used when building the /project named.
 
 - Or you can build by using the Visual Studio or other C/C++ IDEs. 
-
-
+<br>
+<br>
 
 2017. Hieu Hoang. Faculty of Information Technology, University of Science.
 #### License
