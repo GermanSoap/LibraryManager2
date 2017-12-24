@@ -28,3 +28,11 @@ int fileChecking(const char* filename){
 	}
 	return 0;
 }
+void TimingBreak(){
+	for (int i = 0; i < 3; i++)
+	{
+		Sleep(500);
+		printf(".");
+	}
+	printf("\n");
+}

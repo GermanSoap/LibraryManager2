@@ -19,7 +19,7 @@
  extern Book bookList[maxBook];
 // book buffering function declaration
 int buffBook(FILE* bookdata, Book &book);
-void buffAllBooks(FILE* bookdata, Book bookList[], int &bookcounter);
+void BookFetching(FILE* bookdata, Book bookList[], int &bookcounter);
 void BookListing(Book bookList[]);
 void BookListingENG(); // See books
 void BookCreating(Book bookList[]);
@@ -38,4 +38,6 @@ void SeeBookChanges(Book bookList[], int number);
 void SeeBookChangesENG(int number); // See the changes
 void EBSubMenu(int number);
 void EBSubMenuENG(int number); //Edit book submenu
+void FindByBookName(Book bookList[], char bname[szBookName]);
+void FindByISBN(Book bookList[], char isbn[szISBN]);
 #endif // !BOOK

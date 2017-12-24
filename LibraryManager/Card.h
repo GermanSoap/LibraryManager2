@@ -11,6 +11,7 @@
 #include "StudentComponents.h"
 #include "Book.h"
 extern int brcard;
+extern int rtcard;
 struct CardDetail
 {
 	char brISBN[szISBN];
@@ -29,7 +30,7 @@ struct BorrowingCard
 };
 extern BorrowingCard cardList[maxCard];
 
-int PenaltyFee(Time es, Time realReturn);
+int PenaltyFee(BorrowingCard cardList[], Time esReturn, Time realReturn);
 void BorrowingInput(BorrowingCard cardList[], Book bookList[]);
 Time EstimatedTime(Time timeBorrow);
 void getBorrowingList(BorrowingCard cardList[]);

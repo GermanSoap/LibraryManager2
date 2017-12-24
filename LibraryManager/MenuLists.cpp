@@ -1,6 +1,7 @@
 #include "MenuLists.h"
 #include "Student.h"
 #include "Book.h"
+#include "CoreFunction.h"
 Book bookList[maxBook]; // solve external struct
 Student studentList[maxStudent]; // same as line 4
 /*Starting Introduction function
@@ -16,14 +17,14 @@ void Introduction() {
 	printf("\t  ||                                   DAI HOC QUOC GIA TPHCM                                    ||\n");
 	printf("\t  ||                              TRUONG DAI HOC KHOA HOC TU NHIEN                               ||\n");
 	printf("\t  ||                                                                                             ||\n");
-	printf("\t  ||                                  DO AN NHAP MON LAP TRINH 01                                ||\n");
+	printf("\t  ||                                  DO AN NHAP MON LAP TRINH 02                                ||\n");
 	printf("\t  ||                                 CHUONG TRINH QUAN LY THU VIEN                               ||\n");
 	printf("\t  ||                            Sinh Vien  : Hoang Minh Hieu                                     ||\n");
 	printf("\t  ||                            Lop        : 17CK1_CL - Khoa CNTT                                ||\n");
 	printf("\t  ||                            MSSV       : 1760311                                             ||\n");
 	printf("\t  ||                            Dien Thoai : 0125 428 0401                                       ||\n");
 	printf("\t  ||                            Email      : 1760311@student.hcmus.edu.vn                        ||\n");
-	printf("\t  ||    Source code available now on my GitHub: https://github.com/hyperion0201/LibraryManager   ||\n");
+	printf("\t  ||   Source code available now on my GitHub: https://github.com/hyperion0201/LibraryManager2   ||\n");
 	printf("\t  ||                                                                                             ||\n");
 	printf("\t  =================================================================================================\n");
 	_getch();
@@ -34,48 +35,55 @@ Input : none
 Output : waiting system and prompting user for avoiding interrupts
 */
 void InitializingComponents() {
+	int studentflag, bookflag, cardflag;
 	printf("\n");
 	printf("\t\t================= CHAO MUNG BAN DEN VOI QUAN LI THU VIEN =================\n");
 	printf("\n");
-	Sleep(3000);
-	printf("\t Chuong trinh dang chuan bi du lieu. Vui long doi trong giay lat !");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". \n");
-	printf("\t Luu y : De chuong trinh chay on dinh,\n\t ban can phai nhap thong tin khoi dau cho 1 doc gia va 1 cuon sach dau tien.\n");
 	Sleep(2000);
-	printf("\t Ban da hieu roi chu. Bat dau nao. \n");
-	Sleep(2000);
-	printf("\n");
-	printf("\t -> Nhap thong tin cho doc gia dau tien :\n");
-	printf("\n");
-	StudentDeclaration(studentList);
-	printf("\n");
-	printf("\t -> Nhap thong tin cho cuon sach dau tien : \n");
-	printf("\n");
-	BookDeclaration(bookList);
-	Sleep(2000);
-	printf("\n");
-	printf("\t Thu vien da nhan duoc du lieu khoi dong. Chuong trinh se duoc tiep tuc");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". ");
-	Sleep(500);
-	printf(". \n");
+	printf("\t Chuong trinh dang chuan bi du lieu. Vui long doi trong giay lat ");
+	TimingBreak();
+	printf("\t -> Dang kiem tra du lieu");
+	TimingBreak();
+	if (fileChecking("./AppData/Student.txt") == 1)
+	{
+		Sleep(500);
+		printf("\t -> Phat hien du lieu hoc sinh.\n");
+		Sleep(500);
+		printf("\t -> Dang doc du lieu hoc sinh");
+		TimingBreak();
+		FILE* studentdata = fopen("./AppData/Student.txt", "rt");
+		StudentFetching(studentdata, studentList, studentcounter);
+		fclose(studentdata);
+		studentflag = 1;
+	}
+	else studentflag = 0;
+	if (fileChecking("./AppData/Book.txt") == 1){
+		Sleep(500);
+		printf("\t -> Phat hien du lieu sach.\n");
+		Sleep(500);
+		printf("\t -> Dang doc du lieu sach");
+		TimingBreak();
+		FILE* bookdata = fopen("./AppData/Book.txt", "rt");
+		BookFetching(bookdata, bookList, bookcounter);
+		fclose(bookdata);
+		bookflag = 1;
+	}
+	else bookflag = 0;
+	if (studentflag == 0)
+	{
+		printf("\t -> He thong phat hien day la lan dau su dung.\n");
+		Sleep(500);
+		printf("\t -> Vui long khoi tao thong tin cua hoc sinh dau tien.\n\n");
+		StudentDeclaration(studentList);
+	}
+	if (bookflag == 0)
+	{
+		Sleep(500);
+		printf("\n\t -> Vui long khoi tao thong tin cuon sach dau tien. \n\n");
+		Sleep(500);
+		BookDeclaration(bookList);
+	}
+
 }
 /*Starting MainMenu function
 Type: integer

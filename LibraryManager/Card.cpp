@@ -3,7 +3,8 @@
 #include "Student.h"
 BorrowingCard cardList[maxCard];
 int brcard = 0;
-int PenaltyFee(Time esReturn, Time realReturn){
+int rtcard = 0;
+int PenaltyFee(BorrowingCard cardList[], Time esReturn, Time realReturn){
 	// Initiating variables : daysover(days over rules), fee(money for paying), distance1(between 2 returning time),
 	int daysover, distance1, distance2;
 	int fee = 0;
@@ -432,6 +433,9 @@ void BorrowingInput(BorrowingCard cardList[], Book bookList[]){
 			printf("\t  -> Nhap nam muon : ");
 			scanf_s("%d", &cardList[brcard].timeBorrow.year);
 			printf("\n");
+			cardList[brcard].esReturn.day = EstimatedTime(cardList[brcard].timeBorrow).day;
+			cardList[brcard].esReturn.month = EstimatedTime(cardList[brcard].timeBorrow).month;
+			cardList[brcard].esReturn.year = EstimatedTime(cardList[brcard].timeBorrow).year;
 			printf("\t=============== NHAP THONG TIN SACH MUON ==============\n");
 			do
 			{
@@ -616,7 +620,7 @@ void ReturningInput(BorrowingCard cardList[]){
 			do
 			{
 				printf("\n");
-				//int flag = 0;
+				
 				int rtbook;
 				printf("     -> Nhap so sach can tra : ");
 				scanf_s("%d", &rtbook);
@@ -642,17 +646,18 @@ void ReturningInput(BorrowingCard cardList[]){
 					}
 					printf("  -> Tra sach thanh cong ! \n");
 					Sleep(1000);
-					brcard--;
+				//	brcard--;
+					rtcard++;
 					break;
 				}
 
 			} while (true);
 			break;
 		}
+		break;
 	}
 }
 void CardMenu(){
-	 {
 		while (true)
 		{
 			system("cls");
@@ -661,6 +666,8 @@ void CardMenu(){
 			printf("   -> 2. Lap phieu tra sach \n");
 			printf("   -> 3. Xem danh sach phieu muon \n");
 			printf("   -> 4. Xem danh sach phieu tra \n");
+			printf("   -> 5. Xoa lich su phieu muon \n");
+			printf("   -> 6. Xoa lich su phieu tra \n");
 			printf("   -> 0. Thoat                \n");
 			printf("===================================================\n");
 			int choice;
@@ -685,7 +692,7 @@ void CardMenu(){
 			}
 			else if (choice == 4)
 			{
-			//	getReturningList(cardList); break;
+			getReturningList(cardList); break;
 			}
 			else
 			{
@@ -694,4 +701,41 @@ void CardMenu(){
 			}
 		}
 	}
+void getReturningList(BorrowingCard cardList[]){
+	system("cls");
+	if (rtcard == 0) printf("  -> Hien tai khong co doc gia nao tra sach !\n");
+	else
+	{
+		for (int i = 0; i < rtcard;i++)
+		if (cardList[i].realReturn.day >= 0) // check real return day for filtered return list from borrow list
+		{
+			int flag = 0;
+			printf("================== THONG TIN PHIEU TRA SACH =================\n");
+			printf("\n");
+			printf("   -> Ma so doc gia : ");
+			puts(cardList[i].brID);
+			printf("   -> Ten doc gia : ");
+			puts(cardList[i].brName);
+			printf("   -> Thoi diem muon sach : %d/%d/%d\n", cardList[i].timeBorrow.day, cardList[i].timeBorrow.month, cardList[i].timeBorrow.year);
+			printf("   -> Thoi diem tra sach du kien : %d/%d/%d\n", cardList[i].esReturn.day, cardList[i].esReturn.month, cardList[i].esReturn.year);
+			printf("   -> Thoi diem tra sach thuc te : %d/%d/%d\n", cardList[i].realReturn.day, cardList[i].realReturn.month, cardList[i].realReturn.year);
+			printf("   -> Tong so cuon sach da muon : %d\n", cardList[i].brAmount);
+			printf("   -> Danh sach cac sach da muon : \n");
+			for (int j = 0; j < cardList[i].brAmount; j++)
+			{
+				printf("     -> ISBN Cuon sach thu %d : ", j + 1);
+				puts(cardList[i].brList[j].brISBN);
+				printf("     -> Ten cuon sach thu %d : ", j + 1);
+				puts(cardList[i].brList[j].brBookName);
+				printf("     -> Trang thai (tra hay chua) : ");
+				if (cardList[i].brList[j].returned == true) printf(" Da tra\n");
+				else printf(" Chua tra\n");
+
+			}
+			printf("   -> So tien phat phai tra : %d VND \n", PenaltyFee(cardList, cardList[i].esReturn, cardList[i].realReturn));
+			printf("=========================================================\n");
+			flag = 1; break;
+		}
+	}
+	_getch();
 }

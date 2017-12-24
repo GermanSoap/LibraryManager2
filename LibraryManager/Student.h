@@ -29,4 +29,7 @@ void DayCreating();
 void DayExpired();
 void StudentDeclaration(Student studentList[]);
 void StudentDeleting(Student studentList[], int number);
+void FindByName(Student studentList[], char name[szName]);
+void FindByID(Student studentList[], char id[szID]);
+
 #endif // STUDENT

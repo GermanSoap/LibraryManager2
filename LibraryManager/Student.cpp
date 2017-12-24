@@ -310,7 +310,7 @@ void StudentCreating(Student studentList[]){
 			{
 				printf(" ============== THONG TIN DOC GIA THU  %d =============\n", studentcounter + 1);
 				fflush(stdin);
-				getchar();// Clear the caches
+				// Clear the caches
 				// Input the informations
 				printf("  -> Ma so doc gia thu %d : ", studentcounter + 1);
 				gets(studentList[studentcounter].LibID);
@@ -350,11 +350,11 @@ void StudentCreating(Student studentList[]){
 }
 void DayCreating(){
 	printf("\n");
-	printf("\t  -> Nhap ngay lap the : ");
+	printf("  -> Nhap ngay lap the : ");
 	scanf("%d", &studentList[studentcounter].timeCreate.day);
-	printf("'t  -> Nhap thang lap the : ");
+	printf("  -> Nhap thang lap the : ");
 	scanf("%d", &studentList[studentcounter].timeCreate.month);
-	printf("\t  -> Nhap nam lap the : ");
+	printf("  -> Nhap nam lap the : ");
 	scanf("%d", &studentList[studentcounter].timeCreate.year);
 }
 void DayExpired(){
@@ -396,7 +396,6 @@ void StudentDeleting(Student studentList[],int number){
 	{
 		char answer;
 		fflush(stdin);
-		getchar();
 		printf("  -> Ban co chac chan muon xoa hay khong ? (Y) de xoa, (N) de huy bo. : ");
 		answer = getchar();
 		if (answer == 'y' || answer == 'Y')
@@ -434,4 +433,72 @@ void StudentDeleting(Student studentList[],int number){
 		printf("Co loi khi xoa, vui long thu lai..");
 		Sleep(1000);
 	}
+}
+void FindByName(Student studentList[], char name[szName]){
+	int flag = 0;
+	printf("================ KET QUA TIM KIEM ==================\n");
+	for (int i = 0; i < studentcounter; i++) {
+		printf("\n");
+		if (strcmp(name, studentList[i].Name) == 0) {
+			printf("   -> Ma doc gia : ");
+			puts(studentList[i].LibID);
+			printf("   -> Ten doc gia : ");
+			puts(studentList[i].Name);
+			printf("   -> CMND doc gia : ");
+			puts(studentList[i].ID);
+			printf("   -> Ngay thang nam sinh : ");
+			puts(studentList[i].Birth);
+			printf("   -> Gioi tinh : ");
+			puts(studentList[i].Sex);
+			printf("   -> Email : ");
+			puts(studentList[i].Email);
+			printf("   -> Dia chi : ");
+			puts(studentList[i].Address);
+			printf("   -> Thoi gian lap the thu vien : %d/%d/%d\n", studentList[i].timeCreate.day, studentList[i].timeCreate.month, studentList[i].timeCreate.year);
+			printf("   -> Ngay het han : %d/%d/%d\n", studentList[i].timeExpired.day, studentList[i].timeExpired.month, studentList[i].timeExpired.year);
+			printf("====================================================\n");
+			flag++;
+		}
+	}
+	if (flag == 0) printf("Khong tim thay ket qua !");
+	else
+	{
+		printf("\n");
+		printf("   - > Tong cong co %d hoc sinh duoc tim thay.\n", flag);
+	}
+	_getch();
+}
+void FindByID(Student studentList[], char id[szID]){
+	int flag = 0;
+	printf("================ KET QUA TIM KIEM ==================\n");
+	for (int i = 0; i < studentcounter; i++) {
+		printf("\n");
+		if (strcmp(id, studentList[i].ID) == 0) {
+			printf("   -> Ma doc gia : ");
+			puts(studentList[i].LibID);
+			printf("   -> Ten doc gia : ");
+			puts(studentList[i].Name);
+			printf("   -> CMND doc gia : ");
+			puts(studentList[i].ID);
+			printf("   -> Ngay thang nam sinh : ");
+			puts(studentList[i].Birth);
+			printf("   -> Gioi tinh : ");
+			puts(studentList[i].Sex);
+			printf("   -> Email : ");
+			puts(studentList[i].Email);
+			printf("   -> Dia chi : ");
+			puts(studentList[i].Address);
+			printf("   -> Thoi gian lap the thu vien : %d/%d/%d\n", studentList[i].timeCreate.day, studentList[i].timeCreate.month, studentList[i].timeCreate.year);
+			printf("   -> Ngay het han : %d/%d/%d\n", studentList[i].timeExpired.day, studentList[i].timeExpired.month, studentList[i].timeExpired.year);
+			printf("====================================================\n");
+			flag++;
+		}
+	}
+	if (flag == 0) printf("Khong tim thay ket qua !");
+	else
+	{
+		printf("\n");
+		printf("   - > Tong cong co %d hoc sinh duoc tim thay.\n", flag);
+	}
+	_getch();
 }

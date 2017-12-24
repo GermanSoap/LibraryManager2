@@ -5,24 +5,11 @@
 #include "Student.h"
 #include "MenuLists.h"
 void main() {
-	int studentflag, bookflag, cardflag;
-	if (fileChecking("./AppData/Student.txt") == 1)
-	{
-		printf("Tim thay File.");
-		studentflag = 1;
-		Sleep(1000);
-		FILE* studentdata = fopen("./AppData/Student.txt", "rt");
-		StudentFetching(studentdata, studentList, studentcounter);
-		fclose(studentdata);
-	}
-	else
-	{
-		studentflag = 0;
-
-	}
+	
+	
 		int menuchoice, smchoice, bmchoice, statschoice;
 		// Initialising components as waiting for avoiding interupt
-		//InitializingComponents();
+		InitializingComponents();
 		system("cls");
 		while (true)
 		{
@@ -73,22 +60,22 @@ void main() {
 							{
 									  system("cls");
 									  fflush(stdin);
-									  char cmnd[25];
+									  char cmnd[szID];
 									  printf("  -> Nhap CMND doc gia can tim kiem : ");
-									  getchar();
+									  
 									  gets_s(cmnd);
-									  // SearchByID(cmnd);
+									  FindByID(studentList, cmnd);
 									  break;
 							}
 							case 6:
 							{
 									  system("cls");
 									  fflush(stdin);
-									  char name[25];
+									  char name[szName];
 									  printf("  -> Nhap ten doc gia can tim kiem : ");
-									  getchar();
+									  
 									  gets_s(name);
-									  // SearchByName(name);
+									  FindByName(studentList, name);
 									  break;
 							}
 							default:
@@ -145,22 +132,20 @@ void main() {
 							{
 									  system("cls");
 									  fflush(stdin);
-									  char isbn[25];
-									  getchar();
+									  char isbn[szISBN];
 									  printf(" -> Nhap ma sach(ISBN) can tim : ");
 									  gets_s(isbn);
-									  //  SearchByISBN(isbn);
+									  FindByISBN(bookList, isbn);
 									  break;
 							}
 							case 6:
 							{
 									  system("cls");
 									  fflush(stdin);
-									  char bookname[30];
-									  getchar();
+									  char bookname[szBookName];
 									  printf(" -> Nhap vao ten sach can tim : ");
 									  gets_s(bookname);
-									  //  SearchByBookName(bookname);
+									   FindByBookName(bookList, bookname);
 									  break;
 							}
 							default:
