@@ -5,7 +5,7 @@
 #define szBookName 30
 #define szAuthor 25
 #define szProducer 25
-#define szYearProducing 4 
+#define szYearProducing 5
 #define szGenre 20
 extern int totalbook;
 extern int bookcounter;

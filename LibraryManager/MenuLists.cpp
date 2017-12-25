@@ -2,6 +2,8 @@
 #include "Student.h"
 #include "Book.h"
 #include "CoreFunction.h"
+#include "Card.h"
+#include "Statistics.h"
 Book bookList[maxBook]; // solve external struct
 Student studentList[maxStudent]; // same as line 4
 /*Starting Introduction function
@@ -69,6 +71,25 @@ void InitializingComponents() {
 		bookflag = 1;
 	}
 	else bookflag = 0;
+	if (fileChecking("./AppData/Card.txt") == 1){
+		Sleep(500);
+		printf("\t -> Phat hien du lieu the muon.\n");
+		Sleep(500);
+		printf("\t -> Dang doc du lieu the muon");
+		TimingBreak();
+		FILE* carddata = fopen("./AppData/Card.txt", "rt");
+		CardFetching(carddata, cardList, brcard);
+		fclose(carddata);
+		cardflag = 1;
+	}
+	else cardflag = 0;
+
+	if (fileChecking("./AppData/Stat.txt") == 1)
+	{
+		FILE* statdata = fopen("./AppData/Stat.txt", "rt");
+		StatFetching(statdata);
+		fclose(statdata);
+	}
 	if (studentflag == 0)
 	{
 		printf("\t -> He thong phat hien day la lan dau su dung.\n");

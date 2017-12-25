@@ -106,3 +106,9 @@ void LateStats(BorrowingCard cardList[]) {
 	printf("=================================================================");
 	_getch();
 }
+void statSaveInstance(FILE* statdata){
+	fprintf(statdata, "%d %d %d", totalbook, readybook, borrowedbook);
+}
+void StatFetching(FILE* statdata){
+	fscanf(statdata, "%d %d %d", &totalbook, &readybook, &borrowedbook);
+}

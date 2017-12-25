@@ -19,4 +19,6 @@ void TotalBookInUse(Book bookList[]);
 void TotalBookInUseENG(); // stats books in-use, not available for lending
 void LateStats(BorrowingCard cardList[]);
 void LateStatsENG(); // stats students who are in out of time
+void statSaveInstance(FILE *statdata);
+void StatFetching(FILE* statdata);
 #endif // !STATISTICS_

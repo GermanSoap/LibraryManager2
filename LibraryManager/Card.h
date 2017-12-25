@@ -16,7 +16,7 @@ struct CardDetail
 {
 	char brISBN[szISBN];
 	char brBookName[szBookName];
-	bool returned;
+	int returned;
 };
 struct BorrowingCard
 {
@@ -37,4 +37,7 @@ void getBorrowingList(BorrowingCard cardList[]);
 void ReturningInput(BorrowingCard cardList[]);
 void getReturningList(BorrowingCard cardList[]);
 void CardMenu();
+int buffCard(FILE* carddata, BorrowingCard &card);
+void CardFetching(FILE* carddata, BorrowingCard cardList[], int &brcard);
+void cardSaveInstance(FILE* carddata, BorrowingCard cardList[], int brcard);
 #endif // !CARD

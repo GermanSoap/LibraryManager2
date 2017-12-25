@@ -291,92 +291,48 @@ void BookEditing(Book bookList[], int number){
 }
 void BookCreating(Book bookList[]){
 	while (true)
-
 	{
-
 		int choice;
-
 		printf("===================== MENU TAO SACH ========================\n");
-
 		printf("                 -> 1. Tao sach moi                         \n");
-
 		printf("                 -> 2. Thoat                                   \n");
-
 		printf("===============================================================\n");
-
 		printf("      -> Nhap vao lua chon cua ban : ");
-
 		scanf_s("%d", &choice);
-
 		if (choice == 1)
-
 		{
-
 			if (bookcounter > maxBook) printf("Khong du bo nho de tao hay cap nhat sach !");
-
 			else while (bookcounter < maxBook)
-
 			{
-
 				printf("============ THONG TIN CUON SACH THU %d ============\n", bookcounter + 1);
-
 				fflush(stdin);
-
-				getchar();
-
 				printf("    -> Nhap ma sach : ");
-
 				gets_s(bookList[bookcounter].ISBN);
-
 				printf("    -> Nhap ten sach : ");
-
 				gets_s(bookList[bookcounter].BookName);
-
 				printf("    -> Nhap tac gia : ");
-
 				gets_s(bookList[bookcounter].Author);
-
 				printf("    -> Nhap ten nha san xuat : ");
-
 				gets_s(bookList[bookcounter].Producer);
-
 				printf("    -> Nhap nam san xuat : ");
-
 				gets_s(bookList[bookcounter].YearProducing);
-
 				printf("    -> Nhap the loai : ");
-
 				gets_s(bookList[bookcounter].Genre);
-
 				printf("    -> Nhap gia : ");
-
 				scanf_s("%d", &bookList[bookcounter].Pricing);
-
 				printf("    -> Nhap vao so luong sach nhap ve : ");
-
 				scanf_s("%d", &bookList[bookcounter].Amount);
-
 				totalbook += bookList[bookcounter].Amount;
-
 				readybook += bookList[bookcounter].Amount;
-
 				bookcounter++;
-
 				Sleep(1000);
-
 				printf("Tao sach moi thanh cong !\n");
-
 				Sleep(500);
-
 				break;
-
 			}
 		}
-
 		else if (choice == 2) break;
-
 		break;
-
 	}
 }
 void BookDeleting(Book bookList[], int number){
@@ -457,69 +413,6 @@ void BookDeleting(Book bookList[], int number){
 		Sleep(1000);
 
 	}
-}
-
-void SearchByBookName(Book bookList[], char name[30]){
-	int flag = 0;
-	printf("============ KET QUA TIM KIEM ===========\n");
-	for (int i = 0; i < bookcounter; i++) {
-		if (strcmp(name, bookList[i].BookName) == 0) {
-			printf("\n");
-			printf("    -> Ma sach : ");
-			puts(bookList[i].ISBN);
-			printf("    -> Ten sach : ");
-			puts(bookList[i].BookName);
-			printf("    -> Tac gia : ");
-			puts(bookList[i].Author);
-			printf("    -> Nha xuat ban : ");
-			puts(bookList[i].Producer);
-			printf("    -> Nam xuat ban : ");
-			puts(bookList[i].YearProducing);
-			printf("    -> The loai : ");
-			puts(bookList[i].Genre);
-			printf("    -> Gia(VND) : %d\n", bookList[i].Pricing);
-			printf("==========================================\n");
-			flag++;
-		}
-	}
-	if (flag == 0) printf("Khong tim thay ket qua !");
-	else
-	{
-		printf("\n");
-		printf("   - > Tong cong co %d sach duoc tim thay.\n", flag);
-	}
-	_getch();
-}
-void SearchByISBN(Book bookList[], char isbn[30]){
-	int flag = 0;
-	printf("============ KET QUA TIM KIEM ===========\n");
-	for (int i = 0; i < bookcounter; i++) {
-		if (strcmp(isbn, bookList[i].ISBN) == 0) {
-			printf("\n");
-			printf("    -> Ma sach : ");
-			puts(bookList[i].ISBN);
-			printf("    -> Ten sach : ");
-			puts(bookList[i].BookName);
-			printf("    -> Tac gia : ");
-			puts(bookList[i].Author);
-			printf("    -> Nha xuat ban : ");
-			puts(bookList[i].Producer);
-			printf("    -> Nam xuat ban : ");
-			puts(bookList[i].YearProducing);
-			printf("    -> The loai : ");
-			puts(bookList[i].Genre);
-			printf("    -> Gia(VND) : %d\n", bookList[i].Pricing);
-			printf("==========================================\n");
-			flag++;
-		}
-	}
-	if (flag == 0) printf("Khong tim thay ket qua !");
-	else
-	{
-		printf("\n");
-		printf("   - > Tong cong co %d sach duoc tim thay.\n", flag);
-	}
-	_getch();
 }
 void SeeBookChanges(Book bookList[], int number){
 	printf("============ THONG TIN CUON SACH THU %d SAU KHI CHINH SUA ==============\n", number);
@@ -635,4 +528,23 @@ void FindByISBN(Book bookList[], char isbn[szISBN]){
 		printf("   - > Tong cong co %d sach duoc tim thay.\n", flag);
 	}
 	_getch();
+}
+void bookSaveInstance(FILE* bookdata, Book bookList[], int bookcounter){
+	for (int i = 0; i < bookcounter; i++)
+	{
+		fputs(bookList[i].ISBN,bookdata);
+		fprintf(bookdata, "\n");
+		fputs(bookList[i].BookName, bookdata);
+		fprintf(bookdata, "\n");
+		fputs(bookList[i].Author, bookdata);
+		fprintf(bookdata, "\n");
+		fputs(bookList[i].Producer, bookdata);
+		fprintf(bookdata, "\n");
+		fputs(bookList[i].YearProducing, bookdata);
+		fprintf(bookdata, "\n");
+		fputs(bookList[i].Genre, bookdata);
+		fprintf(bookdata, "\n");
+		fprintf(bookdata, "%d %d", bookList[i].Pricing, bookList[i].Amount);
+		fprintf(bookdata, "\n");
+	}
 }

@@ -208,28 +208,7 @@ void StudentDeclaration(Student studentList[]){
 		if (studentcounter >= 1) break;
 	}
 }
-void FileTransfer(FILE* studentdata){
-	fprintf(studentdata, "%d\n", studentcounter);
-	for (int i = 0; i < studentcounter; i++)
-	{
-		fputs(studentList[i].LibID,studentdata);
-		fprintf(studentdata,"\n");
-		fputs(studentList[i].Name,studentdata);
-		fprintf(studentdata, "\n");
-		fputs(studentList[i].ID,studentdata);
-		fprintf(studentdata, "\n");
-		fputs(studentList[i].Birth, studentdata);
-		fprintf(studentdata, "\n");
-		fputs(studentList[i].Sex, studentdata);
-		fprintf(studentdata, "\n");
-		fputs(studentList[i].Email, studentdata);
-		fprintf(studentdata, "\n");
-		fputs(studentList[i].Address, studentdata);
-		fprintf(studentdata, "\n");
-		fprintf(studentdata, "%d %d %d %d %d %d", studentList[i].timeCreate.day, studentList[i].timeCreate.month, studentList[i].timeCreate.year, studentList[i].timeExpired.day, studentList[i].timeExpired.month, studentList[i].timeExpired.year);
-		fprintf(studentdata, "\n");
-	}
-}
+
 /* Starting EditStudent SubMenu
 Input : ESSubMenu		 choice
 Output: choice
@@ -501,4 +480,25 @@ void FindByID(Student studentList[], char id[szID]){
 		printf("   - > Tong cong co %d hoc sinh duoc tim thay.\n", flag);
 	}
 	_getch();
+}
+void StudentSaving(FILE* studentdata, Student studentList[], int studentcounter){
+	for (int i = 0; i < studentcounter; i++)
+	{
+		fputs(studentList[i].LibID, studentdata);
+		fprintf(studentdata, "\n");
+		fputs(studentList[i].Name, studentdata);
+		fprintf(studentdata, "\n");
+		fputs(studentList[i].ID, studentdata);
+		fprintf(studentdata, "\n");
+		fputs(studentList[i].Birth, studentdata);
+		fprintf(studentdata, "\n");
+		fputs(studentList[i].Sex, studentdata);
+		fprintf(studentdata, "\n");
+		fputs(studentList[i].Email, studentdata);
+		fprintf(studentdata, "\n");	
+		fputs(studentList[i].Address, studentdata);
+		fprintf(studentdata, "\n");
+		fprintf(studentdata, "%d %d %d %d %d %d", studentList[i].timeCreate.day, studentList[i].timeCreate.month, studentList[i].timeCreate.year, studentList[i].timeExpired.day, studentList[i].timeExpired.month, studentList[i].timeExpired.year);
+		fprintf(studentdata, "\n");
+	}
 }

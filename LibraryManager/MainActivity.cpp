@@ -111,7 +111,6 @@ void main() {
 							{
 									  system("cls");
 									  fflush(stdin);
-									  getchar();
 									  int location;
 									  printf("  -> Nhap so thu tu sach can sua : ");
 									  scanf_s("%d", &location);
@@ -216,6 +215,30 @@ void main() {
 			} break;
 			case 0:
 			{
+					  char answer;
+					  system("cls");
+					  printf("   -> Ban co muon luu du lieu ? (Y/N) : ");
+					  scanf(" %c", &answer);
+					  if (answer == 'y' || answer == 'Y')
+					  {
+						  Sleep(500);
+						  printf("   -> Dang luu giu lieu");
+						  TimingBreak();
+						  FILE* studentdata = fopen("./AppData/Student.txt", "wt");
+						  StudentSaving(studentdata, studentList, studentcounter);
+						  fclose(studentdata);
+						  FILE* bookdata = fopen("./AppData/Book.txt", "wt");
+						  bookSaveInstance(bookdata, bookList, bookcounter);
+						  fclose(bookdata);
+						  FILE* carddata = fopen("./AppData/Card.txt", "wt");
+						  cardSaveInstance(carddata, cardList, brcard);
+						  fclose(carddata);
+						  FILE* statdata = fopen("./AppData/Stat.txt", "wt");
+						  statSaveInstance(statdata);
+						  fclose(statdata);
+						  printf("Ok.");
+						  Sleep(500);
+					  }
 					  return;
 			} break;
 			case 5: // about author

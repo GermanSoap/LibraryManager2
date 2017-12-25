@@ -1,16 +1,24 @@
 DCM1
-Hieu
+Hoang Minh Hieu
 2
 2
 2
 2
 2
 2 2 2 2 2 6
-DCM2
+DCM3
+Nguyen Cac
+1234
+2/5/2001
 Nam
-2
-2
-2
-2
-2
-4 4 4 4 4 8
+cc@gmail.com
+HCM
+2 2 2017 2 2 2021
+DCM5
+Clone 1
+1234
+2/1/1999
+Nam
+cc@gmail.com
+hcm
+2 4 2001 2 4 2005
