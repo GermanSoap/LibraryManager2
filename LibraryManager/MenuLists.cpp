@@ -44,8 +44,6 @@ void InitializingComponents() {
 	Sleep(2000);
 	printf("\t Chuong trinh dang chuan bi du lieu. Vui long doi trong giay lat ");
 	TimingBreak();
-	printf("\t -> Dang kiem tra du lieu");
-	TimingBreak();
 	if (fileChecking("./AppData/Student.txt") == 1)
 	{
 		Sleep(500);

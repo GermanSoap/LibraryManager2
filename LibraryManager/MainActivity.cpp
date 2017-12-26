@@ -217,13 +217,15 @@ void main() {
 			{
 					  char answer;
 					  system("cls");
-					  printf("   -> Ban co muon luu du lieu ? (Y/N) : ");
+					  printf("   -> Ban co muon luu du lieu ? (Y de luu, N de thoat, C de quay lai) : ");
 					  scanf(" %c", &answer);
 					  if (answer == 'y' || answer == 'Y')
 					  {
 						  Sleep(500);
-						  printf("   -> Dang luu giu lieu");
+						  printf("   -> Dang luu du lieu");
 						  TimingBreak();
+						  char* NewDir = "AppData";
+						  CreateDirectory(NewDir, NULL); // create directory for catch saving error
 						  FILE* studentdata = fopen("./AppData/Student.txt", "wt");
 						  StudentSaving(studentdata, studentList, studentcounter);
 						  fclose(studentdata);
@@ -239,7 +241,10 @@ void main() {
 						  printf("Ok.");
 						  Sleep(500);
 					  }
-					  return;
+					  else if (answer == 'n' || answer == 'N')
+						  return;
+					  else if (answer == 'c' || answer == 'C')
+						  continue;
 			} break;
 			case 5: // about author
 			{
