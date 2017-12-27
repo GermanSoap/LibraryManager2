@@ -40,4 +40,7 @@ void CardMenu();
 int buffCard(FILE* carddata, BorrowingCard &card);
 void CardFetching(FILE* carddata, BorrowingCard cardList[], int &brcard);
 void cardSaveInstance(FILE* carddata, BorrowingCard cardList[], int brcard);
+int PenaltyFeeENG(BorrowingCard cardList[], Time esReturn, Time realReturn);
+void BorrowingInputENG(BorrowingCard cardList[], Book bookList[]);
+
 #endif // !CARD

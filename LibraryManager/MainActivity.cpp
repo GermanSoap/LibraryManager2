@@ -238,7 +238,7 @@ void main() {
 						  FILE* statdata = fopen("./AppData/Stat.txt", "wt");
 						  statSaveInstance(statdata);
 						  fclose(statdata);
-						  printf("Ok.");
+						  printf("   -> Luu du lieu thanh cong !.");
 						  Sleep(500);
 					  }
 					  else if (answer == 'n' || answer == 'N')
