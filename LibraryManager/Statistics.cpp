@@ -145,7 +145,7 @@ void BookStatsByGenreENG(Book bookList[]) {
 				else break;
 			}
 		}
-		if (dem != 0) printf(" -> Genre %s has %d books : %d\n", bookList[i].Genre, dem);
+		if (dem != 0) printf(" -> Genre %s has %d books.\n", bookList[i].Genre, dem);
 	}
 	printf("=================================================================\n");
 	_getch();

@@ -472,7 +472,7 @@ void BookDeclarationENG(Book bookList[]){
 			gets_s(bookList[bookcounter].Genre);
 			printf("    -> Pricing of book %d : ", bookcounter + 1);
 			scanf_s("%d", &bookList[bookcounter].Pricing);
-			printf("    -> Amount deliveried of book %d : ");
+			printf("    -> Amount deliveried of book %d : ", bookcounter + 1);
 			scanf_s("%d", &bookList[bookcounter].Amount);
 			totalbook += bookList[bookcounter].Amount;
 			readybook += bookList[bookcounter].Amount;
