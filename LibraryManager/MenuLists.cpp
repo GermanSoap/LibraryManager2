@@ -200,3 +200,186 @@ int StatisticsMenu() {
 	scanf_s("%d", &choice);
 	return choice;
 }
+void IntroductionENG() {
+	system("cls");
+	printf("\n\n\n");
+	printf("\t  =================================================================================================\n");
+	printf("\t  ||                                                                                             ||\n");
+	printf("\t  ||                         VIETNAM NATIONAL UNIVERSITY HO CHI MINH CITY                        ||\n");
+	printf("\t  ||                                 UNIVERSITY OF SCIENCES                                      ||\n");
+	printf("\t  ||                                                                                             ||\n");
+	printf("\t  ||                               PROGRAMMING PROJECT 02                                        ||\n");
+	printf("\t  ||                          THE LIBRARY MANAGER APPLICATION                                    ||\n");
+	printf("\t  ||                    Student  : Hoang Minh Hieu                                               ||\n");
+	printf("\t  ||                    Class        : 17CK1_CL - Faculty of Information Technology              ||\n");
+	printf("\t  ||                    Student ID       : 1760311                                               ||\n");
+	printf("\t  ||                    Phone : 0125 428 0401                                                    ||\n");
+	printf("\t  ||                    Email      : 1760311@student.hcmus.edu.vn                                ||\n");
+	printf("\t  ||    Source code available now on my GitHub: https://github.com/hyperion0201/LibraryManager2  ||\n");
+	printf("\t  ||                                                                                             ||\n");
+	printf("\t  =================================================================================================\n");
+	_getch();
+}
+int MainMenuENG() {
+	system("cls");
+	int choice;
+	printf("\n");
+	printf("\t                THE LIBRARY MANAGER SOFTWARE -- HOANG MINH HIEU -- 17CK1_CL         \n");
+	printf("\t      ==============================================================================\n");
+	printf("\t      ||                                                                          ||\n");
+	printf("\t      ||                         1. Student Management                            ||\n");
+	printf("\t      ||                         2. Book Management                               ||\n");
+	printf("\t      ||                         3. Library card management(borrow, return)       ||\n");
+	printf("\t      ||                         4. Statistics                                    ||\n");
+	printf("\t      ||                         5. See author                                    ||\n");
+	printf("\t      ||                         0. Exit                                          ||\n");
+	printf("\t      ||                                                                          ||\n");
+	printf("\t      ==============================================================================\n");
+	printf("                   Please input your choice  :  ");
+	scanf_s("%d", &choice);
+	return choice;
+}
+int StudentManagementMenuENG() {
+	system("cls");
+	int choice;
+	printf("\t\t ======================= STUDENTS MANAGEMENT =====================\n");
+	printf("\t\t ||                                                             ||\n");
+	printf("\t\t ||             1. See the students list in library database    ||\n");
+	printf("\t\t ||             2. Create a new student                         ||\n");
+	printf("\t\t ||             3. Edit a student                               ||\n");
+	printf("\t\t ||             4. Delete a student                             ||\n");
+	printf("\t\t ||             5. Search a student by ID                       ||\n");
+	printf("\t\t ||             6. Search a student by name                     ||\n");
+	printf("\t\t ||             0. Go back to menu                              ||\n");
+	printf("\t\t ||                                                             ||\n");
+	printf("\t\t =================================================================\n");
+	printf("                     Please input your choice :  ");
+	scanf_s("%d", &choice);
+	return choice;
+}
+int BookManagementMenuENG() {
+	system("cls");
+	int choice;
+	printf("\t\t ========================== BOOKS MANAGEMENT ==========================\n");
+	printf("\t\t ||                                                              ||\n");
+	printf("\t\t ||             1. See the books list in library's database      ||\n");
+	printf("\t\t ||             2. Create a new book                             ||\n");
+	printf("\t\t ||             3. Edit a book                                   ||\n");
+	printf("\t\t ||             4. Delete a book                                 ||\n");
+	printf("\t\t ||             5. Search a book by ISBN                         ||\n");
+	printf("\t\t ||             6. Search a book by name                         ||\n");
+	printf("\t\t ||             0. Go back to menu                               ||\n");
+	printf("\t\t ||                                                              ||\n");
+	printf("\t\t ==================================================================\n");
+	printf("                       Please input your choice :  ");
+	scanf_s("%d", &choice);
+	return choice;
+}
+int StatisticsMenuENG() {
+	system("cls");
+	int choice;
+	printf("\t\t ========================= STATISTICS ==== =========================\n");
+	printf("\t\t ||                                                               ||\n");
+	printf("\t\t ||            1. Stats total books in library                    ||\n");
+	printf("\t\t ||            2. Stats book by genres                            ||\n");
+	printf("\t\t ||            3. Stats total students in library                 ||\n");
+	printf("\t\t ||            4. Stats student by sex                            ||\n");
+	printf("\t\t ||            5. Stats books which are in-use                    ||\n");
+	printf("\t\t ||            6. Stats students who are in-late                  ||\n");
+	printf("\t\t ||            0. Go back to menu                                 ||\n");
+	printf("\t\t ||                                                               ||\n");
+	printf("\t\t ===================================================================\n");
+	printf("                  Please input your choice  :  ");
+	scanf_s("%d", &choice);
+	return choice;
+}
+void InitializingComponentsENG() {
+	int studentflag, bookflag, cardflag;
+	printf("\n");
+	printf("\t\t================= WELCOME TO HCMUS LIBRARY MANAGER SOFTWARE =================\n");
+	printf("\n");
+	Sleep(2000);
+	printf("\t Initiating components, please wait");
+	TimingBreak();
+	if (fileChecking("./AppData/Student.txt") == 1)
+	{
+		Sleep(500);
+		printf("\t -> Students data detected.\n");
+		Sleep(500);
+		printf("\t -> Fetching students data");
+		TimingBreak();
+		FILE* studentdata = fopen("./AppData/Student.txt", "rt");
+		StudentFetching(studentdata, studentList, studentcounter);
+		fclose(studentdata);
+		studentflag = 1;
+	}
+	else studentflag = 0;
+	if (fileChecking("./AppData/Book.txt") == 1){
+		Sleep(500);
+		printf("\t -> Books data detected.\n");
+		Sleep(500);
+		printf("\t -> Fetching books data");
+		TimingBreak();
+		FILE* bookdata = fopen("./AppData/Book.txt", "rt");
+		BookFetching(bookdata, bookList, bookcounter);
+		fclose(bookdata);
+		bookflag = 1;
+	}
+	else bookflag = 0;
+	if (fileChecking("./AppData/Card.txt") == 1){
+		Sleep(500);
+		printf("\t -> Cards data detected.\n");
+		Sleep(500);
+		printf("\t -> Fetching cards data");
+		TimingBreak();
+		FILE* carddata = fopen("./AppData/Card.txt", "rt");
+		CardFetching(carddata, cardList, brcard);
+		fclose(carddata);
+		cardflag = 1;
+	}
+	else cardflag = 0;
+
+	if (fileChecking("./AppData/Stat.txt") == 1)
+	{
+		FILE* statdata = fopen("./AppData/Stat.txt", "rt");
+		StatFetching(statdata);
+		fclose(statdata);
+	}
+	if (studentflag == 0)
+	{
+		printf("\t -> Detected this is the 1st time using this app.\n");
+		Sleep(500);
+		printf("\t -> Please declare a student.\n\n");
+		StudentDeclarationENG(studentList);
+	}
+	if (bookflag == 0)
+	{
+		Sleep(500);
+		printf("\n\t -> Please declare a book. \n\n");
+		Sleep(500);
+		BookDeclarationENG(bookList);
+	}
+
+}
+int LanguageSelection(){
+	int lang;
+
+	while (true)
+	{
+		system("cls");
+		printf("\n\n\n\n\n\n\n");
+		printf("\t\t\t\t\tMoi chon ngon ngu/Select your language :\n\n");
+		printf("\t\t\t\t\t\t  1. Tieng Viet \n");
+		printf("\t\t\t\t\t\t  2. English  \n\n");
+		printf("\n\t\t\t\t   -> Nhap vao lua chon cua ban /Input your choice : ");
+		scanf_s("%d", &lang);
+		if (lang == 1 || lang == 2) break;
+		else
+		{
+			printf("\n\t\t\t  -> Lua chon khong ton tai ! / Invalid option !\n");
+			Sleep(1000);
+			continue;
+		}
+	}
+	return lang;
+}

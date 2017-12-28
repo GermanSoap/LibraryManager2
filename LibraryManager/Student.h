@@ -32,4 +32,15 @@ void StudentDeleting(Student studentList[], int number);
 void FindByName(Student studentList[], char name[szName]);
 void FindByID(Student studentList[], char id[szID]);
 void StudentSaving(FILE* studentdata, Student studentList[], int studentcounter);
+void StudentEditingENG(Student studentList[], int number);
+void ESSubMenuENG(int number);
+void StudentCreatingENG(Student studentList[]);
+void SeeLocalChangesENG(Student studentList[], int number);
+void DayCreatingENG();
+void StudentDeclarationENG(Student studentList[]);
+void StudentDeletingENG(Student studentList[], int number);
+void FindByNameENG(Student studentList[], char name[szName]);
+void FindByIDENG(Student studentList[], char id[szID]);
+void StudentListingENG(Student studentList[]);
+
 #endif // STUDENT

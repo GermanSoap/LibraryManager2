@@ -502,3 +502,436 @@ void StudentSaving(FILE* studentdata, Student studentList[], int studentcounter)
 		fprintf(studentdata, "\n");
 	}
 }
+void StudentEditingENG(Student studentList[], int number){
+	while (true)
+	{
+		if (number> 0 && number <= studentcounter)
+		{
+			int choice;
+			printf("================ STUDENT MODIFYING MENU ===============\n");
+			printf("  -> 1. Modify library ID                              \n");
+			printf("  -> 2. Modify student name                            \n");
+			printf("  -> 3. Modify ID                                      \n");
+			printf("  -> 4. Modify birthday                                \n");
+			printf("  -> 5. Modify sex                                     \n");
+			printf("  -> 6. Modify email                                   \n");
+			printf("  -> 7. Modify address                                 \n");
+			printf("  -> 8. Modify card create time                        \n");
+			printf("  -> 0. Go back                                        \n");
+			printf("=======================================================\n");
+			printf("   Input your choice : ");
+			scanf_s("%d", &choice);
+			if (choice == 0) break;
+			switch (choice)
+			{
+			case 8: {
+						system("cls");
+						fflush(stdin);
+						int dayedit, monthedit, yearedit;
+						printf("============ MODIFYING CONTENTS =============\n");
+						printf(" -> Input new day : ");
+						scanf_s("%d", &dayedit);
+						printf(" -> Input new month : ");
+						scanf_s("%d", &monthedit);
+						printf(" -> Input new year : ");
+						scanf_s("%d", &yearedit);
+						studentList[number - 1].timeCreate.day = dayedit;
+						studentList[number - 1].timeCreate.month = monthedit;
+						studentList[number - 1].timeCreate.year = yearedit;
+						// changing timeExpired
+						studentList[number - 1].timeExpired.day = dayedit;
+						studentList[number - 1].timeExpired.month = monthedit;
+						studentList[number - 1].timeExpired.year = yearedit + 4;
+
+			} break;
+			case 1: {
+						getchar();
+						fflush(stdin);
+						char LibIDNew[25];
+						printf("Input new library ID : ");
+						gets_s(LibIDNew);
+						strcpy(studentList[number - 1].LibID, LibIDNew);
+						Sleep(1000);
+						printf("Library ID modified successfully !");
+						Sleep(500);
+			} break;
+			case 2: {
+						getchar();
+						fflush(stdin);
+						char NewName[25];
+						printf("Input new name : ");
+						gets_s(NewName);
+						strcpy(studentList[number - 1].Name, NewName);
+						Sleep(1000);
+						printf("Name modified successfully !");
+						Sleep(500);
+			} break;
+			case 3: {
+						getchar();
+						fflush(stdin);
+						char NewID[25];
+						printf("Input new ID : ");
+						gets_s(NewID);
+						strcpy(studentList[number - 1].ID, NewID);
+						Sleep(1000);
+						printf("ID modified successfully !");
+						Sleep(500);
+			} break;
+			case 4: {
+						getchar();
+						fflush(stdin);
+						char NewBirth[25];
+						printf("Input new birthday : ");
+						gets_s(NewBirth);
+						strcpy(studentList[number - 1].Birth, NewBirth);
+						Sleep(1000);
+						printf("Birthday modified successfully !");
+						Sleep(500);
+			} break;
+			case 5: {
+						getchar();
+						fflush(stdin);
+						char NewSex[25];
+						printf("Input new sex : ");
+						gets_s(NewSex);
+						strcpy(studentList[number - 1].Sex, NewSex);
+						Sleep(1000);
+						printf("Sex modified successfully !");
+						Sleep(500);
+			} break;
+			case 6: {
+						getchar();
+						fflush(stdin);
+						char NewEmail[25];
+						printf("Input new email : ");
+						gets_s(NewEmail);
+						strcpy(studentList[number - 1].Email, NewEmail);
+						Sleep(1000);
+						printf("Email modified successfully !");
+						Sleep(500);
+			} break;
+			case 7: {
+						getchar();
+						fflush(stdin);
+						char NewAddress[50];
+						printf("Input new address : ");
+						gets_s(NewAddress);
+						strcpy(studentList[number - 1].Address, NewAddress);
+						Sleep(1000);
+						printf("Address modified successfully !");
+						Sleep(500);
+			} break;
+			default:
+			{
+					   printf("Invalid choice, please try again...");
+					   Sleep(1000);
+					   break;
+			}
+			}
+			system("cls");
+		}
+		else
+		{
+			printf("Student data is not exist in database, please try again...\n");
+			_getch();
+			Sleep(1000);
+		}
+		break;
+	}
+}
+void StudentDeclarationENG(Student studentList[]){
+	while (true) {
+		if (studentcounter >= maxStudent) printf("Not enough memory to create a student !");
+		else
+		while (studentcounter < maxStudent)
+		{
+			printf(" ================= INPUT INFORMATIONS FOR STUDENT %d ===================\n", studentcounter + 1);
+			// Clear the caches
+			// Input the informations
+			printf("  -> Library ID of student %d : ", studentcounter + 1);
+			gets(studentList[studentcounter].LibID);
+			printf("  -> Name of student %d : ", studentcounter + 1);
+			gets(studentList[studentcounter].Name);
+			printf("  -> ID of student %d : ", studentcounter + 1);
+			gets(studentList[studentcounter].ID);
+			printf("  -> Birthday of student %d : ", studentcounter + 1);
+			gets(studentList[studentcounter].Birth);
+			printf("  -> Sex of student %d (Male/Female) : ", studentcounter + 1);
+			gets(studentList[studentcounter].Sex);
+			printf("  -> Email of student %d : ", studentcounter + 1);
+			gets(studentList[studentcounter].Email);
+			printf("  -> Address of student %d (Please type without splitation using dot/comma symbol) : ", studentcounter + 1);
+			gets(studentList[studentcounter].Address);
+			//Library card creating
+			printf("  -> Input library creating day : \n");
+			DayCreatingENG();
+			// Automatic evaluate expired time
+			DayExpired();
+			studentcounter++; break;
+		}
+		if (studentcounter >= 1) break;
+	}
+}
+void ESSubMenuENG(int number) {
+	//system("cls");
+	int choice;
+	while (true)
+	{
+		if (number > 0 && number <= maxStudent)
+		{
+			system("cls");
+			printf("\n");
+			printf("=================== STUDENT MODIFYING OPTIONS ==================\n");
+			printf("           1. Continue to modify student %d                  \n", number);
+			printf("           2. See informations of student %d after/before modifying      \n", number);
+			printf("           3. Cancel modifying                                    \n");
+			printf("=================================================================\n");
+			printf("    Input your choice : ");
+			scanf_s("%d", &choice);
+			if (choice == 3) break;
+			switch (choice)
+			{
+			case 1: StudentEditingENG(studentList, number); break;
+			case 2: SeeLocalChangesENG(studentList, number); break;
+			default: printf("Invalid choice, please try again ! \n");
+				break;
+			}
+		}
+		else
+		{
+			printf("Student data is not exist in database, please try again...\n");
+			Sleep(1000);
+			break;
+		}
+	}
+	//_getch();
+}
+void SeeLocalChangesENG(Student studentList[], int number){
+	printf("\n");
+	printf("============== STUDENT %d INFORMATIONS AFTER/BEFORE MODIFYING =============\n", number);
+	printf("\n");
+	printf(" -> Library ID : ");
+	puts(studentList[number - 1].LibID);
+	printf(" -> Name : ");
+	puts(studentList[number - 1].Name);
+	printf(" -> ID : ");
+	puts(studentList[number - 1].ID);
+	printf(" -> Birthday : ");
+	puts(studentList[number - 1].Birth);
+	printf(" -> Sex : ");
+	puts(studentList[number - 1].Sex);
+	printf(" -> Email : ");
+	puts(studentList[number - 1].Email);
+	printf(" -> Address : ");
+	puts(studentList[number - 1].Address);
+	printf(" -> Library card created on : %d/%d/%d\n", studentList[number - 1].timeCreate.day, studentList[number - 1].timeCreate.month, studentList[number - 1].timeCreate.year);
+	printf(" -> Time expired  : %d/%d/%d\n", studentList[number - 1].timeExpired.day, studentList[number - 1].timeExpired.month, studentList[number - 1].timeExpired.year);
+	Sleep(1000);
+	_getch();
+}
+void StudentCreatingENG(Student studentList[]){
+	while (true)
+	{
+		system("cls");
+		fflush(stdin);
+		int choice;
+		printf("===================== STUDENT CREATING MENU ========================\n");
+		printf("                 -> 1. Create a new student                         \n");
+		printf("                 -> 2. Go back                                   \n");
+		printf("====================================================================\n");
+		printf("      -> Input your choice : ");
+		scanf_s("%d", &choice);
+		if (choice == 1)
+		{
+			if (studentcounter > maxStudent) printf("Not enough memory to create a student !");
+			else
+			{
+				printf(" ============== INFORMATIONS INPUT OF STUDENT  %d =============\n", studentcounter + 1);
+				fflush(stdin);
+				// Clear the caches
+				// Input the informations
+				printf("  -> Library ID of student %d : ", studentcounter + 1);
+				gets(studentList[studentcounter].LibID);
+				printf("  -> Name of student %d : ", studentcounter + 1);
+				gets(studentList[studentcounter].Name);
+				printf("  -> ID of student %d : ", studentcounter + 1);
+				gets(studentList[studentcounter].ID);
+				printf("  -> Birthday of student %d : ", studentcounter + 1);
+				gets_s(studentList[studentcounter].Birth);
+				printf("  -> Sex of student %d (Male/Female) : ", studentcounter + 1);
+				gets_s(studentList[studentcounter].Sex);
+				printf("  -> Email of student %d : ", studentcounter + 1);
+				gets_s(studentList[studentcounter].Email);
+				printf("  -> Address of student %d (Pls type without dot/comma symbol) : ", studentcounter + 1);
+				gets_s(studentList[studentcounter].Address);
+				//Library card creating
+				printf("  -> Input library creating time : \n");
+				DayCreatingENG();
+				// Automatic evaluate expired time
+				DayExpired();
+				studentcounter++;
+				Sleep(1000);
+				printf("-> Student created successfully !");
+				Sleep(500);
+				break;
+			}
+			//	continue;
+		}
+		else if (choice == 2) break;
+		else
+		{
+			printf("Invalid choice, pls try again !");
+			Sleep(1000);
+			continue;
+		}
+	}
+}
+void DayCreatingENG(){
+	printf("\n");
+	printf("  -> Input creating day : ");
+	scanf("%d", &studentList[studentcounter].timeCreate.day);
+	printf("  -> Input creating month : ");
+	scanf("%d", &studentList[studentcounter].timeCreate.month);
+	printf("  -> Input creating year : ");
+	scanf("%d", &studentList[studentcounter].timeCreate.year);
+}
+void StudentListingENG(Student studentList[]){
+	printf("\t\t================ LISTING OF STUDENTS IN DATABASE ================\n\n");
+	if (studentcounter <= 0) printf("No student to show now. Please add a student first !\n");
+	else {
+		for (int i = 0; i < studentcounter; i++) {
+			printf("=============== INFORMATIONS OF STUDENT %d ============= \n", i + 1);
+			printf("\n");
+			printf(" -> Library ID : ");
+			puts(studentList[i].LibID);
+			printf(" -> Name : ");
+			puts(studentList[i].Name);
+			printf(" -> ID : ");
+			puts(studentList[i].ID);
+			printf(" -> Birthday : ");
+			puts(studentList[i].Birth);
+			printf(" -> Sex : ");
+			puts(studentList[i].Sex);
+			printf(" -> Email : ");
+			puts(studentList[i].Email);
+			printf(" -> Address : ");
+			puts(studentList[i].Address);
+			printf(" -> Library card creating time : %d/%d/%d\n", studentList[i].timeCreate.day, studentList[i].timeCreate.month, studentList[i].timeCreate.year);
+			printf(" -> Time expired  : %d/%d/%d\n", studentList[i].timeExpired.day, studentList[i].timeExpired.month, studentList[i].timeExpired.year);
+			printf("\n");
+		}
+	}
+	_getch();
+}
+void StudentDeletingENG(Student studentList[], int number){
+	int flag = 0;
+	if (number > 0 && number <= studentcounter)
+	{
+		char answer;
+		fflush(stdin);
+		printf("  -> Confirm delete? (Y/N) : ");
+		answer = getchar();
+		if (answer == 'y' || answer == 'Y')
+		{
+			for (int i = number - 1; i < studentcounter - 1; i++)
+			{
+				strcpy(studentList[i].LibID, studentList[i + 1].LibID);
+				strcpy(studentList[i].Name, studentList[i + 1].Name);
+				strcpy(studentList[i].ID, studentList[i + 1].ID);
+				strcpy(studentList[i].Birth, studentList[i + 1].Birth);
+				strcpy(studentList[i].Sex, studentList[i + 1].Sex);
+				strcpy(studentList[i].Email, studentList[i + 1].Email);
+				strcpy(studentList[i].Address, studentList[i + 1].Address);
+				//Timing library card
+				studentList[i].timeCreate.day = studentList[i + 1].timeCreate.day;
+				studentList[i].timeCreate.month = studentList[i + 1].timeCreate.month;
+				studentList[i].timeCreate.year = studentList[i + 1].timeCreate.year;
+				// Timing expired card
+				studentList[i].timeExpired.day = studentList[i + 1].timeExpired.day;
+				studentList[i].timeExpired.month = studentList[i + 1].timeExpired.month;
+				studentList[i].timeExpired.year = studentList[i + 1].timeExpired.year;
+			}
+			studentcounter--; flag = 1;
+		}
+		else if (answer == 'n' || answer == 'N') return;
+	}
+	if (flag == 1) {
+		printf("Deleted successfully !\n");
+		printf("\n");
+		Sleep(1000);
+		StudentListingENG(studentList);
+	}
+	else
+	{
+		printf("An error occurred. Please try again...");
+		Sleep(1000);
+	}
+}
+void FindByNameENG(Student studentList[], char name[szName]){
+	int flag = 0;
+	printf("================ SEARCHING RESULT ==================\n");
+	for (int i = 0; i < studentcounter; i++) {
+		printf("\n");
+		if (strcmp(name, studentList[i].Name) == 0) {
+			printf("   -> Library ID : ");
+			puts(studentList[i].LibID);
+			printf("   -> Name : ");
+			puts(studentList[i].Name);
+			printf("   -> ID : ");
+			puts(studentList[i].ID);
+			printf("   -> Birthday : ");
+			puts(studentList[i].Birth);
+			printf("   -> Sex : ");
+			puts(studentList[i].Sex);
+			printf("   -> Email : ");
+			puts(studentList[i].Email);
+			printf("   -> Address : ");
+			puts(studentList[i].Address);
+			printf("   -> Library card creating time : %d/%d/%d\n", studentList[i].timeCreate.day, studentList[i].timeCreate.month, studentList[i].timeCreate.year);
+			printf("   -> Time expired : %d/%d/%d\n", studentList[i].timeExpired.day, studentList[i].timeExpired.month, studentList[i].timeExpired.year);
+			printf("====================================================\n");
+			flag++;
+		}
+	}
+	if (flag == 0) printf("No result !");
+	else
+	{
+		printf("\n");
+		printf("   - > Searched end with %d results. \n", flag);
+	}
+	_getch();
+}
+void FindByIDENG(Student studentList[], char id[szID]){
+	int flag = 0;
+	printf("================ SEARCHING RESULT ==================\n");
+	for (int i = 0; i < studentcounter; i++) {
+		printf("\n");
+		if (strcmp(id, studentList[i].ID) == 0) {
+			printf("   -> Library ID : ");
+			puts(studentList[i].LibID);
+			printf("   -> Name : ");
+			puts(studentList[i].Name);
+			printf("   -> ID : ");
+			puts(studentList[i].ID);
+			printf("   -> Birthday : ");
+			puts(studentList[i].Birth);
+			printf("   -> Sex : ");
+			puts(studentList[i].Sex);
+			printf("   -> Email : ");
+			puts(studentList[i].Email);
+			printf("   -> Address : ");
+			puts(studentList[i].Address);
+			printf("   -> Library card creating time : %d/%d/%d\n", studentList[i].timeCreate.day, studentList[i].timeCreate.month, studentList[i].timeCreate.year);
+			printf("   -> Time expired : %d/%d/%d\n", studentList[i].timeExpired.day, studentList[i].timeExpired.month, studentList[i].timeExpired.year);
+			printf("====================================================\n");
+			flag++;
+		}
+	}
+	if (flag == 0) printf("No result !");
+	else
+	{
+		printf("\n");
+		printf("   - > Searched end with %d results. \n", flag);
+	}
+	_getch();
+}
