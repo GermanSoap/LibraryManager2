@@ -724,8 +724,8 @@ void EBSubMenuENG(int number){
 			if (choice == 3) break;
 			switch (choice)
 			{
-			case 1: BookEditing(bookList, number); break;
-			case 2: SeeBookChanges(bookList, number); break;
+			case 1: BookEditingENG(bookList, number); break;
+			case 2: SeeBookChangesENG(bookList, number); break;
 			default: printf("Invalid choice, please try again...");
 				break;
 			}
@@ -738,4 +738,68 @@ void EBSubMenuENG(int number){
 		}
 	}
 	//_getch();
+}
+void FindByBookNameENG(Book bookList[], char bname[szBookName]){
+	int flag = 0;
+	printf("============ SEARCHING RESULT ===========\n");
+	for (int i = 0; i < bookcounter; i++) {
+		if (strcmp(bname, bookList[i].BookName) == 0) {
+			printf("\n");
+			printf("    -> ISBN : ");
+			puts(bookList[i].ISBN);
+			printf("    -> Book name : ");
+			puts(bookList[i].BookName);
+			printf("    -> Author : ");
+			puts(bookList[i].Author);
+			printf("    -> Producer : ");
+			puts(bookList[i].Producer);
+			printf("    -> Year producing : ");
+			puts(bookList[i].YearProducing);
+			printf("    -> Genre : ");
+			puts(bookList[i].Genre);
+			printf("    -> Pricing (VND) : %d\n", bookList[i].Pricing);
+			printf("    -> Amount available : %d\n", bookList[i].Amount);
+			printf("==========================================\n");
+			flag++;
+		}
+	}
+	if (flag == 0) printf("No result !");
+	else
+	{
+		printf("\n");
+		printf("   - > Searched end with %d results.\n", flag);
+	}
+	_getch();
+}
+void FindByISBNENG(Book bookList[], char isbn[szISBN]){
+	int flag = 0;
+	printf("============ SEARCHING RESULT ===========\n");
+	for (int i = 0; i < bookcounter; i++) {
+		if (strcmp(isbn, bookList[i].ISBN) == 0) {
+			printf("\n");
+			printf("    -> ISBN : ");
+			puts(bookList[i].ISBN);
+			printf("    -> Book name : ");
+			puts(bookList[i].BookName);
+			printf("    -> Author : ");
+			puts(bookList[i].Author);
+			printf("    -> Producer : ");
+			puts(bookList[i].Producer);
+			printf("    -> Year producing : ");
+			puts(bookList[i].YearProducing);
+			printf("    -> Genre : ");
+			puts(bookList[i].Genre);
+			printf("    -> Pricing (VND) : %d\n", bookList[i].Pricing);
+			printf("    -> Amount available : %d\n", bookList[i].Amount);
+			printf("==========================================\n");
+			flag++;
+		}
+	}
+	if (flag == 0) printf("No result !");
+	else
+	{
+		printf("\n");
+		printf("   - > Searched end with %d results.\n", flag);
+	}
+	_getch();
 }

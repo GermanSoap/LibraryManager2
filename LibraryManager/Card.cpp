@@ -837,3 +837,348 @@ void cardSaveInstance(FILE* carddata, BorrowingCard cardList[], int brcard){
 		fprintf(carddata, "\n");
 	}
 }
+void BorrowingInputENG(BorrowingCard cardList[], Book bookList[]){
+	system("cls");
+	while (true)
+	{
+		if (brcard >= maxCard) printf("Not enough memory to create a card !");
+		else while (brcard < maxCard)
+		{
+			fflush(stdin); //Clear caches
+			do {
+				int flag = 0;
+				printf("\t============ BORROWING INFORMATIONS INPUT ============\n");
+				printf("\t-> Input borrower's LibID: ");
+				gets_s(cardList[brcard].brID);
+				for (int i = 0; i<studentcounter; i++)
+				if (strcmp(studentList[i].LibID, cardList[brcard].brID) == 0)
+				{
+					strcpy(cardList[brcard].brName, studentList[i].Name);
+					flag = 1; // already in db
+					break;
+				}
+				if (flag == 1) break;
+				else if (flag == 0) {
+					printf(" -> The user you've typed is not exist in database, please try again ! \n");
+					Sleep(1000);
+					system("cls");
+					continue;
+				}
+			} while (true);
+
+			// input borrowing day	
+			printf("\n");
+			printf("\t=============== TIME BORROWING INPUT ========================\n");
+			printf("\t  -> Input borrowing time : ");
+			scanf_s("%d", &cardList[brcard].timeBorrow.day);
+			printf("\t  -> Input borrowing month : ");
+			scanf_s("%d", &cardList[brcard].timeBorrow.month);
+			printf("\t  -> Input borrowing year : ");
+			scanf_s("%d", &cardList[brcard].timeBorrow.year);
+			printf("\n");
+			cardList[brcard].esReturn.day = EstimatedTime(cardList[brcard].timeBorrow).day;
+			cardList[brcard].esReturn.month = EstimatedTime(cardList[brcard].timeBorrow).month;
+			cardList[brcard].esReturn.year = EstimatedTime(cardList[brcard].timeBorrow).year;
+			printf("\t=============== BOOK BORROWING INFORMATIONS INPUT ==============\n");
+			do
+			{
+				printf("\n");
+				printf("\t  -> Input amount for borrowing : ");
+				scanf_s("%d", &cardList[brcard].brAmount);
+				if (cardList[brcard].brAmount > bookcounter)
+				{
+					printf("  -> You can't borrow more than book amount in library database !\n");
+					Sleep(1000);
+					continue;
+				}
+				else
+				{
+					readybook -= cardList[brcard].brAmount;
+					borrowedbook += cardList[brcard].brAmount;
+					//remainingbook = bookInATime[brcard];
+					break;
+				}
+			} while (true);
+
+			getchar();
+			for (int i = 0; i < cardList[brcard].brAmount; i++) {
+				fflush(stdin);
+				do
+				{
+					int flag = 0;
+					printf("\t  -> Input ISBN of book %d :  ", i + 1);
+					gets_s(cardList[brcard].brList[i].brISBN);
+					for (int j = 0; j < bookcounter; j++)
+					{
+						if (strcmp(cardList[brcard].brList[i].brISBN, bookList[j].ISBN) == 0 && bookList[j].Amount>0)
+						{
+							flag = 1; // already in db
+							cardList[brcard].brList[i].returned = 0;
+							bookList[j].Amount--;
+							strcpy(cardList[brcard].brList[i].brBookName, bookList[j].BookName);
+							break;
+						}
+					}
+					if (flag == 1)
+					{
+						printf(" -> Added to borrowing card list ! \n");
+						Sleep(1000);
+						break;
+					}
+
+					else if (flag == 0)
+					{
+						printf(" -> Book data is not exist in database, please try again !\n");
+						Sleep(1000);
+						system("cls");
+						continue;
+					}
+
+				} while (true);
+			}
+			brcard++; break;
+		}
+		break;
+	}
+}
+void getBorrowingListENG(BorrowingCard cardList[]){
+	system("cls");
+	if (brcard == 0) printf("  -> There is no student in borrowing status now...\n");
+	else
+	{
+		printf("  -> Total of borrowing card : %d \n\n ", brcard);
+		printf("=================== LiSTING OF BORROWING CARDS  ==================\n");
+		printf("\n");
+		for (int i = 0; i < brcard; i++)
+		{
+			printf("================ INFORMATIONS OF BORROWING CARD %d ================\n", i + 1);
+			printf("   -> Library ID : ");
+			puts(cardList[i].brID);
+			printf("   -> Name : ");
+			puts(cardList[i].brName);
+			printf("   -> Recently borrowed time : %d/%d/%d\n", cardList[i].timeBorrow.day, cardList[i].timeBorrow.month, cardList[i].timeBorrow.year);
+			printf("   -> Estimated returning time : %d/%d/%d\n", EstimatedTime(cardList[i].timeBorrow).day, EstimatedTime(cardList[i].timeBorrow).month, EstimatedTime(cardList[i].timeBorrow).year);
+			printf("   -> Amount borrowed : %d\n", cardList[i].brAmount);
+			printf("   -> LISTING BOOKS BORROWED :\n");
+			for (int k = 0; k < cardList[i].brAmount; k++)
+			{
+				printf("              -> ISBN of book %d : ", k + 1);
+				puts(cardList[i].brList[k].brISBN);
+				printf("              -> Name of book %d  : ", k + 1);
+				puts(cardList[i].brList[k].brBookName);
+				printf("              -> Returning status : ");
+				if (cardList[i].brList[k].returned == 0) printf("Not return");
+				else printf("Returned");
+			}
+			printf("\n");
+			printf("====================================================================\n");
+		}
+		printf("===================== ATTENTION : ========================= \n");
+		printf(" -> Time borrowing can be up to 7 days max.\n");
+		printf(" -> If returned late than estimated time, the penalty fee are 5000VND/day.\n");
+		printf(" -> If lost a book, penaty fee are up to 200 percents of book's value .\n");
+		printf(" Please follow the library rule. Thanks.                        \n");
+		printf("===========================================================\n");
+	}
+	_getch();
+}
+void ReturningInputENG(BorrowingCard cardList[]){
+	while (true)
+	{
+		int brlocation;
+		system("cls");
+		while (true)
+		{
+			fflush(stdin); // clear caches
+			printf("=============== RETURNING INFORMATIONS INPUT ============\n ");
+			do
+			{
+				char returnID[szLibID];
+				int flag = 0;
+				printf("     -> Input returning ID : ");
+				gets_s(returnID);
+				for (int i = 0; i < brcard; i++)
+				{
+					if (strcmp(returnID, cardList[i].brID) == 0)
+					{
+						flag = 1; // already in db
+						brlocation = i;  // point the borrower location
+						break;
+					}
+				}
+				if (flag == 1)
+				{
+					break;
+				}
+				else
+				{
+					printf("  -> This student isn't in borrowing list. Please try again !\n");
+					Sleep(1000);
+					system("cls");
+					continue;
+				}
+			} while (true);
+
+			printf("     -> Input real returning day : ");
+			scanf_s("%d", &cardList[brlocation].realReturn.day);
+			printf("     -> Input real returning month : ");
+			scanf_s("%d", &cardList[brlocation].realReturn.month);
+			printf("     -> Input real returning year : ");
+			scanf_s("%d", &cardList[brlocation].realReturn.year);
+			do
+			{
+				printf("\n");
+
+				int rtbook;
+				printf("     -> Input the book amount to be returned : ");
+				scanf_s("%d", &rtbook);
+				if (rtbook > cardList[brlocation].brAmount)
+					continue;
+				else if (rtbook == cardList[brlocation].brAmount) // return all books in a time
+				{
+					borrowedbook -= rtbook;
+					readybook += rtbook;
+					char rtISBN[10][szISBN];
+					for (int j = 0; j < rtbook; j++)
+					{
+						printf("   -> Input ISBN of book %d : ", j + 1);
+						getchar();
+						gets_s(rtISBN[j]);
+						for (int k = 0; k < bookcounter; k++)
+						if (strcmp(rtISBN[j], bookList[k].ISBN) == 0)
+						{
+							bookList[k].Amount++;
+							cardList[brlocation].brList[j].returned = 1;
+						}
+
+					}
+					printf("  -> Book returned successfully ! \n");
+					Sleep(1000);
+					//	brcard--;
+					break;
+				}
+
+			} while (true);
+			rtcard++;
+			break;
+		}
+		break;
+	}
+}
+void CardMenuENG(){
+	while (true)
+	{
+		system("cls");
+		printf("================ CARD MENU ==============\n");
+		printf("   -> 1. Create borrowing card \n");
+		printf("   -> 2. Create returning card \n");
+		printf("   -> 3. See borrowing list \n");
+		printf("   -> 4. See returning list \n");
+		printf("   -> 5. Clear borrowing history \n");
+		printf("   -> 6. Clear returning history \n");
+		printf("   -> 0. Go back                \n");
+		printf("=========================================\n");
+		int choice;
+		printf("   -> Input your choice : ");
+		scanf_s("%d", &choice);
+		getchar();
+		if (choice == 0) break;
+		else if (choice == 1)
+		{
+			BorrowingInputENG(cardList, bookList);
+			break;
+		}
+		else if (choice == 2)
+		{
+			ReturningInputENG(cardList);
+			// EstimatedReturnTime(); no need
+			break;
+		}
+		else if (choice == 3)
+		{
+			getBorrowingListENG(cardList); break;
+		}
+		else if (choice == 4)
+		{
+			getReturningListENG(cardList); break;
+		}
+		else if (choice == 5) {
+			printf("   -> Confirm clear borrowing history ? (Y/N) : ");
+			char answer;
+			fflush(stdin);
+			scanf(" %c", &answer);
+			if (answer == 'y' || answer == 'Y') {
+				Sleep(500);
+				printf("  -> Cleared !");
+				Sleep(500);
+				brcard = 0;
+			}
+			else if (answer == 'N' || answer == 'n'){
+				Sleep(500);
+				continue;
+			}
+		}
+		else if (choice == 6){
+
+			printf("   -> Confirm clear returning history? (Y/N) : ");
+			fflush(stdin);
+			char answer;
+			scanf(" %c", &answer);
+			if (answer == 'Y' || answer == 'y') {
+				Sleep(500);
+				printf("  -> Cleared !");
+				Sleep(500);
+				rtcard = 0;
+			}
+			else if (answer == 'N' || answer == 'n'){
+				Sleep(500);
+				continue;
+			}
+		}
+		else
+		{
+			printf("Invalid choice, please try again !\n");
+			Sleep(500);
+		}
+	}
+}
+void getReturningListENG(BorrowingCard cardList[]){
+	system("cls");
+	if (brcard == 0) printf("There is no student who returning now. !");
+	else
+	{
+		printf("=================== LISTING OF RETURNING CARDS ==================\n");
+		printf("\n");
+		for (int i = 0; i < brcard; i++)
+		{
+			printf("================ INFORMATIONS OF RETURNING CARD %d ================\n", i + 1);
+			printf("   -> Library ID : ");
+			puts(cardList[i].brID);
+			printf("   -> Name : ");
+			puts(cardList[i].brName);
+			printf("   -> Time borrowed : %d/%d/%d\n", cardList[i].timeBorrow.day, cardList[i].timeBorrow.month, cardList[i].timeBorrow.year);
+			printf("   -> Estimated returning time : %d/%d/%d\n", EstimatedTime(cardList[i].timeBorrow).day, EstimatedTime(cardList[i].timeBorrow).month, EstimatedTime(cardList[i].timeBorrow).year);
+			printf("   -> Amount borrowed : %d\n", cardList[i].brAmount);
+			printf("   -> LISTING BOOK BORROWED :\n");
+			for (int k = 0; k < cardList[i].brAmount; k++)
+			{
+				printf("              -> ISBN of book %d : ", k + 1);
+				puts(cardList[i].brList[k].brISBN);
+				printf("              -> Name of book %d  : ", k + 1);
+				puts(cardList[i].brList[k].brBookName);
+				printf("              -> Returning status : ");
+				if (cardList[i].brList[k].returned == 0) printf("Not return\n");
+				else {
+					printf("Returned\n");
+					printf("       -> Real returning time : %d/%d/%d\n", cardList[i].realReturn.day, cardList[i].realReturn.month, cardList[i].realReturn.year);
+					printf("       -> Penalty fee : %d", PenaltyFee(cardList, cardList[i].esReturn, cardList[i].realReturn));
+				}
+			}
+			printf("\n");
+			printf("====================================================================\n");
+		}
+
+	}
+	_getch();
+
+}

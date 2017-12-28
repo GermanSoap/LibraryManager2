@@ -39,5 +39,4 @@ void FindByBookNameENG(Book bookList[], char bname[szBookName]);
 void FindByISBN(Book bookList[], char isbn[szISBN]);
 void FindByISBNENG(Book bookList[], char isbn[szISBN]);
 void bookSaveInstance(FILE* bookdata, Book bookList[], int bookcounter);
-void bookSaveInstanceENG(FILE* bookdata, Book bookList[], int bookcounter);
 #endif // !BOOK
