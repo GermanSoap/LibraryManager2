@@ -1,3 +1,9 @@
+/*
+Copyright™ Hieu Hoang Minh. The Library Manager Project.
+See source code on https://github.com/hyperion0201/LibraryManager2
+Free for personal and commercial use under the MIT license .
+2017. Ho Chi Minh University of Science.
+*/
 #include "Book.h"
 #include "Card.h"
 #include "CoreFunction.h"
@@ -87,6 +93,7 @@ void main() {
 							}
 							default:
 							{
+									   fflush(stdin);
 									   printf("Lua chon khong hop le ! Vui long thu lai..\n");
 									   Sleep(1000);
 									   break;
@@ -524,6 +531,7 @@ void main() {
 			} break;
 			default:
 			{
+					   fflush(stdin);
 					   printf(" -> Invalid choice !");
 					   Sleep(1000);
 			}

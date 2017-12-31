@@ -1,3 +1,9 @@
+/*
+Copyright™ Hieu Hoang Minh. The Library Manager Project.
+See source code on https://github.com/hyperion0201/LibraryManager2
+Free for personal and commercial use under the MIT license .
+2017. Ho Chi Minh University of Science.
+*/
 #include "Book.h"
 #include "CoreFunction.h"
 
@@ -253,7 +259,6 @@ void BookDeleting(Book bookList[], int number){
 	int flag = 0;
 	char answer;
 	fflush(stdin);
-	getchar();
 	printf("  -> Ban co chac chan muon xoa hay khong ? (Y) de xoa, (N) de huy bo. : ");
 	answer = getchar();
 	if (answer == 'y' || answer == 'Y')
@@ -267,9 +272,10 @@ void BookDeleting(Book bookList[], int number){
 				strcpy_s(bookList[i].YearProducing, bookList[i + 1].YearProducing);
 				strcpy_s(bookList[i].Genre, bookList[i + 1].Genre);
 				bookList[i].Pricing = bookList[i + 1].Pricing;
-				totalbook -= bookList[i].Amount;
 				bookList[i].Amount = bookList[i + 1].Amount;
 			}
+			totalbook -= bookList[number - 1].Amount;
+			readybook -= bookList[number - 1].Amount;
 			bookcounter--;
 			flag = 1;
 		}
@@ -649,7 +655,6 @@ void BookDeletingENG(Book bookList[], int number){
 	int flag = 0;
 	char answer;
 	fflush(stdin);
-	getchar();
 	printf("  -> Confirm delete? (Y/N) : ");
 	answer = getchar();
 	if (answer == 'y' || answer == 'Y')
@@ -663,9 +668,10 @@ void BookDeletingENG(Book bookList[], int number){
 				strcpy_s(bookList[i].YearProducing, bookList[i + 1].YearProducing);
 				strcpy_s(bookList[i].Genre, bookList[i + 1].Genre);
 				bookList[i].Pricing = bookList[i + 1].Pricing;
-				totalbook -= bookList[i].Amount;
 				bookList[i].Amount = bookList[i + 1].Amount;
 			}
+			totalbook -= bookList[number - 1].Amount;
+			readybook -= bookList[number - 1].Amount;
 			bookcounter--;
 			flag = 1;
 		}

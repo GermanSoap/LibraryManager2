@@ -1,4 +1,10 @@
 #include "Statistics.h"
+/*
+Copyright™ Hieu Hoang Minh. The Library Manager Project.
+See source code on https://github.com/hyperion0201/LibraryManager2
+Free for personal and commercial use under the MIT license .
+2017. Ho Chi Minh University of Science.
+*/
 #include "Card.h"
 /* Starting StudentStatistics function
 Type : int
@@ -71,7 +77,14 @@ Output : print informations about books which are in-use
 void TotalBookInUse(Book bookList[]) {
 	printf(" ================= THONG KE SACH DANG MUON =================\n");
 	printf("   -> Co %d sach dang duoc muon \n", borrowedbook);
-	
+	if (borrowedbook != 0){
+		printf("   -> Danh sach : \n");
+		for (int i = 0; i < brcard; i++)
+		for (int j = 0; j < borrowedbook; j++)
+		{
+			puts(cardList[i].brList[j].brBookName);
+		}
+	}
 	_getch();
 }
 /* Starting LateStats function
@@ -153,7 +166,15 @@ void BookStatsByGenreENG(Book bookList[]) {
 void TotalBookInUseENG(Book bookList[]) {
 	printf(" ================= IN-BORROWING STATUS STATS =================\n");
 	printf("   -> There are %d book(s) which are being borrowed. \n", borrowedbook);
-
+	if (borrowedbook != 0)
+	{
+		printf("   -> List : \n");
+		for (int i = 0; i < brcard; i++)
+		for (int j = 0; j < borrowedbook; j++)
+		{
+			puts(cardList[i].brList[j].brBookName);
+		}
+	}
 	_getch();
 }
 void LateStatsENG(BorrowingCard cardList[]) {

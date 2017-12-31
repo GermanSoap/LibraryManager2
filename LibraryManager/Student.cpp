@@ -1,3 +1,9 @@
+/*
+Copyright™ Hieu Hoang Minh. The Library Manager Project.
+See source code on https://github.com/hyperion0201/LibraryManager2
+Free for personal and commercial use under the MIT license .
+2017. Ho Chi Minh University of Science.
+*/
 #include "CoreFunction.h"
 #include "Student.h"
 
@@ -184,6 +190,7 @@ void StudentDeclaration(Student studentList[]){
 			printf(" ================= THONG TIN DOC GIA THU %d ===================\n", studentcounter + 1);
 			// Clear the caches
 			// Input the informations
+			getchar();
 			printf("  -> Ma so doc gia thu %d : ", studentcounter + 1);
 			gets(studentList[studentcounter].LibID);
 			printf("  -> Ten doc gia thu %d : ", studentcounter + 1);
@@ -647,6 +654,7 @@ void StudentDeclarationENG(Student studentList[]){
 		{
 			printf(" ================= INPUT INFORMATIONS FOR STUDENT %d ===================\n", studentcounter + 1);
 			// Clear the caches
+			getchar();
 			// Input the informations
 			printf("  -> Library ID of student %d : ", studentcounter + 1);
 			gets(studentList[studentcounter].LibID);

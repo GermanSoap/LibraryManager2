@@ -1,3 +1,9 @@
+/*
+Copyright™ Hieu Hoang Minh. The Library Manager Project.
+See source code on https://github.com/hyperion0201/LibraryManager2
+Free for personal and commercial use under the MIT license .
+2017. Ho Chi Minh University of Science.
+*/
 #include "Card.h"
 #include "Book.h"
 #include "Student.h"
@@ -563,8 +569,8 @@ void getBorrowingList(BorrowingCard cardList[]){
 				printf("              -> Ten cuon sach thu %d  : ", k + 1);
 				puts(cardList[i].brList[k].brBookName);
 				printf("              -> Trang thai : ");
-				if (cardList[i].brList[k].returned == 0) printf("Chua tra");
-				else printf("Da tra");
+				if (cardList[i].brList[k].returned == 0) printf("Chua tra\n");
+				else printf("Da tra\n");
 			}
 			printf("\n");
 			printf("====================================================================\n");
@@ -638,17 +644,27 @@ void ReturningInput(BorrowingCard cardList[]){
 					for (int j = 0; j < rtbook; j++)
 					{
 						printf("   -> Nhap ma sach can tra thu %d : ", j + 1);
-						getchar();
+						
+						fflush(stdin);
 						gets_s(rtISBN[j]);
-						for (int k = 0; k < bookcounter; k++)
-						if (strcmp(rtISBN[j], bookList[k].ISBN) == 0)
+						for (int k = 0; k < cardList[brlocation].brAmount; k++)
 						{
-							bookList[k].Amount++;
-							cardList[brlocation].brList[j].returned = 1;
+							if (strcmp(rtISBN[j], cardList[brlocation].brList[k].brISBN) == 0 )
+							{
+								for (int g = 0; g < bookcounter;g++)
+								if (strcmp(bookList[g].ISBN, rtISBN[j]) == 0)
+								{
+									bookList[g].Amount++;
+										break;
+								}
+								cardList[brlocation].brList[k].returned = 1;
+								break;
+							}
 						}
-
+						printf("  -> Tra sach thanh cong ! \n");
+						Sleep(500);
 					}
-					printf("  -> Tra sach thanh cong ! \n");
+					
 					Sleep(1000);
 				//	brcard--;
 					break;
@@ -767,7 +783,8 @@ void getReturningList(BorrowingCard cardList[]){
 				else {
 					printf("Da tra\n");
 					printf("       -> Thoi diem tra sach : %d/%d/%d\n", cardList[i].realReturn.day, cardList[i].realReturn.month, cardList[i].realReturn.year);
-					printf("       -> So tien phat phai tra : %d", PenaltyFee(cardList, cardList[i].esReturn, cardList[i].realReturn));
+					printf("       -> So tien phat phai tra : %d\n	", PenaltyFee(cardList, cardList[i].esReturn, cardList[i].realReturn));
+					printf("\n");
 				}
 			}
 			printf("\n");
@@ -793,6 +810,7 @@ int buffCard(FILE* carddata, BorrowingCard &card){
 			LineBuffering(carddata, card.brList[i].brISBN,szISBN);
 			LineBuffering(carddata, card.brList[i].brBookName,szBookName);
 			fscanf(carddata, "%d", &card.brList[i].returned);
+			fgetc(carddata);
 		}
 	}
 	return 1;
@@ -825,7 +843,7 @@ void cardSaveInstance(FILE* carddata, BorrowingCard cardList[], int brcard){
 		fprintf(carddata, "\n");
 		fprintf(carddata, "%d %d %d", cardList[i].realReturn.day, cardList[i].realReturn.month, cardList[i].realReturn.year);
 		fprintf(carddata, "\n");
-		for (int j = 0; j < cardList[i].brAmount; i++)
+		for (int j = 0; j < cardList[i].brAmount; j++)
 		{
 			fputs(cardList[i].brList[j].brISBN, carddata);
 			fprintf(carddata, "\n");
@@ -834,7 +852,7 @@ void cardSaveInstance(FILE* carddata, BorrowingCard cardList[], int brcard){
 			fprintf(carddata, "%d", cardList[i].brList[j].returned);
 			fprintf(carddata, "\n");
 		}
-		fprintf(carddata, "\n");
+		//fprintf(carddata, "\n");
 	}
 }
 void BorrowingInputENG(BorrowingCard cardList[], Book bookList[]){
@@ -967,8 +985,8 @@ void getBorrowingListENG(BorrowingCard cardList[]){
 				printf("              -> Name of book %d  : ", k + 1);
 				puts(cardList[i].brList[k].brBookName);
 				printf("              -> Returning status : ");
-				if (cardList[i].brList[k].returned == 0) printf("Not return");
-				else printf("Returned");
+				if (cardList[i].brList[k].returned == 0) printf("Not return\n");
+				else printf("Returned\n");
 			}
 			printf("\n");
 			printf("====================================================================\n");
@@ -1042,17 +1060,27 @@ void ReturningInputENG(BorrowingCard cardList[]){
 					for (int j = 0; j < rtbook; j++)
 					{
 						printf("   -> Input ISBN of book %d : ", j + 1);
-						getchar();
-						gets_s(rtISBN[j]);
-						for (int k = 0; k < bookcounter; k++)
-						if (strcmp(rtISBN[j], bookList[k].ISBN) == 0)
-						{
-							bookList[k].Amount++;
-							cardList[brlocation].brList[j].returned = 1;
-						}
 
+						fflush(stdin);
+						gets_s(rtISBN[j]);
+						for (int k = 0; k < cardList[brlocation].brAmount; k++)
+						{
+							if (strcmp(rtISBN[j], cardList[brlocation].brList[k].brISBN) == 0)
+							{
+								for (int g = 0; g < bookcounter; g++)
+								if (strcmp(bookList[g].ISBN, rtISBN[j]) == 0)
+								{
+									bookList[g].Amount++;
+									break;
+								}
+								cardList[brlocation].brList[k].returned = 1;
+								break;
+							}
+						}
+						printf("  -> Returned successfully ! \n");
+						Sleep(300);
 					}
-					printf("  -> Book returned successfully ! \n");
+
 					Sleep(1000);
 					//	brcard--;
 					break;
@@ -1171,7 +1199,8 @@ void getReturningListENG(BorrowingCard cardList[]){
 				else {
 					printf("Returned\n");
 					printf("       -> Real returning time : %d/%d/%d\n", cardList[i].realReturn.day, cardList[i].realReturn.month, cardList[i].realReturn.year);
-					printf("       -> Penalty fee : %d", PenaltyFee(cardList, cardList[i].esReturn, cardList[i].realReturn));
+					printf("       -> Penalty fee : %d\n", PenaltyFee(cardList, cardList[i].esReturn, cardList[i].realReturn));
+					printf("\n");
 				}
 			}
 			printf("\n");
