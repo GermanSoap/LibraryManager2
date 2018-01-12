@@ -3,7 +3,7 @@
  This is my repository for making the project 2 from University of Science, Vietnam National University HCMC.
 
  - Expired time : Dec 30th, 2017 6:PM CST
- - Current status : private
+ - Current status : public
  
  This project is same as the previous project, most of core functions are same. But with project 1, we can't use structure to define a type of data, use two-dimensions array for storing objects and elements, can't export and fetch data using file,.. All the missing and prevented functions in project 1 are now available for using now. And in case of some functions, they are compulsory.
 
